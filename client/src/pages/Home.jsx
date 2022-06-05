@@ -9,8 +9,8 @@ const Home = () => {
 		logoutUser();
 	};
 	return (
-		<div className="home">
-			{user ? (
+		<main className="center-flex">
+			{!user ? (
 				<>
 					<Link className="btn" to="/login">
 						Login
@@ -33,7 +33,7 @@ const Home = () => {
 					</Link>
 				</>
 			)}
-		</div>
+		</main>
 	);
 };
 

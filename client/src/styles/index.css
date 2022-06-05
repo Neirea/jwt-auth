@@ -15,7 +15,7 @@ body {
 	background: rgb(25, 25, 25);
 	color: white;
 }
-.home {
+.center-flex {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -35,8 +35,49 @@ body {
 	font-size: 1rem;
 	line-height: 1.5;
 	cursor: pointer;
+	opacity: 0.9;
 }
 .btn:disabled {
 	opacity: 0.5;
 	cursor: not-allowed;
+}
+.btn:hover {
+	opacity: 1;
+}
+.btn.submit {
+	width: 100%;
+	padding: 0;
+}
+
+/* Form */
+.form-class {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	background: black;
+	border-radius: 0.5rem;
+	box-shadow: 0 0 5px -2px white;
+	padding: 2rem;
+	width: 25rem;
+}
+.form-input {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+.form-input .input-text {
+	border-radius: 0.25rem;
+	padding: 0.25rem 0.5rem;
+	width: 100%;
+}
+.form-checkbox {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+/* ---------------------- */
+
+.alert {
+	color: red;
+	text-align: center;
 }
