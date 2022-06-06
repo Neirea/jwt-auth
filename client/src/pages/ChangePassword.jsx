@@ -1,56 +1,57 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import useLocalState from "../utils/useLocalState";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
-const Register = () => {
+const ChangePassword = () => {
+	const [values, setValues] = useState({
+		oldPassword: "",
+		newPassword: "",
+		newPasswordConfirm: "",
+	});
 	const {
 		alert,
 		showAlert,
+		hideAlert,
 		loading,
 		setLoading,
-		hideAlert,
 		success,
 		setSuccess,
 	} = useLocalState();
-	const [values, setValues] = useState({
-		name: "",
-		email: "",
-		password: "",
-		confirmPassword: "",
-	});
 	const handleChange = (e) => {
 		setValues({ ...values, [e.target.name]: e.target.value });
 	};
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		hideAlert();
 		setLoading(true);
+		hideAlert();
 
-		const { email, name, password, confirmPassword } = values;
-		const registerUser = { email, name, password };
+		const { oldPassword, newPassword, newPasswordConfirm } = values;
 
 		try {
-			if (password !== confirmPassword) {
+			//check if passwords match and if new pass is different from old one
+			if (newPassword !== newPasswordConfirm || oldPassword === newPassword) {
 				setValues({
 					...values,
-					password: "",
-					confirmPassword: "",
+					newPassword: "",
+					newPasswordConfirm: "",
 				});
+				const alertText =
+					oldPassword === newPassword
+						? "You've entered same password"
+						: "Passwords don't match!";
 				showAlert({
-					text: "Passwords don't match!",
+					text: alertText,
 				});
 			} else {
-				const { data } = await axios.post(
-					`/api/v1/auth/register`,
-					registerUser
-				);
+				await axios.patch("/api/v1/user/updateUserPassword", {
+					oldPassword: oldPassword,
+					newPassword: newPassword,
+				});
 				setSuccess(true);
-				setValues({ name: "", email: "", password: "", confirmPassword: "" });
 				showAlert({
-					text: data.msg,
-					type: "success",
+					text: "Password was successfuly changed!",
 				});
 			}
 		} catch (error) {
@@ -63,56 +64,43 @@ const Register = () => {
 	return (
 		<main className="center-flex">
 			{success && alert.show && (
-				<div className="alert">
+				<>
 					<p>{alert.text}</p>
 					<Link to="/">Go back to Home page</Link>
-				</div>
+				</>
 			)}
 			{!success && (
 				<form className="form-class" onSubmit={handleSubmit}>
 					<div className="form-input">
-						<label htmlFor="name">Your Name:</label>
+						<label htmlFor="oldPass">Old Password:</label>
 						<input
-							id="name"
-							name="name"
-							type="name"
-							className="input-text"
-							autoFocus={true}
-							pattern="[a-zA-Z]+([0-9]+)?"
-							value={values.name}
-							onChange={handleChange}
-						/>
-					</div>
-					<div className="form-input">
-						<label htmlFor="email">Your Email:</label>
-						<input
-							id="email"
-							name="email"
-							type="email"
-							className="input-text"
-							value={values.email}
-							onChange={handleChange}
-						/>
-					</div>
-					<div className="form-input">
-						<label htmlFor="pass">Your Password:</label>
-						<input
-							id="pass"
-							name="password"
+							id="oldPass"
+							name="oldPassword"
 							type="password"
 							className="input-text"
-							value={values.password}
+							value={values.oldPassword}
 							onChange={handleChange}
 						/>
 					</div>
 					<div className="form-input">
-						<label htmlFor="confirmPassword">Confirm Password:</label>
+						<label htmlFor="newPass">New Password:</label>
 						<input
-							id="confirmPassword"
-							name="confirmPassword"
+							id="newPass"
+							name="newPassword"
 							type="password"
 							className="input-text"
-							value={values.confirmPassword}
+							value={values.newPassword}
+							onChange={handleChange}
+						/>
+					</div>
+					<div className="form-input">
+						<label htmlFor="newPassConfirm">Confirm password:</label>
+						<input
+							id="newPassConfirm"
+							name="newPasswordConfirm"
+							type="password"
+							className="input-text"
+							value={values.newPasswordConfirm}
 							onChange={handleChange}
 						/>
 					</div>
@@ -126,4 +114,4 @@ const Register = () => {
 	);
 };
 
-export default Register;
+export default ChangePassword;

@@ -4,7 +4,7 @@ import Register from "./Register";
 import Verify from "./Verify";
 import ForgotPassword from "./ForgotPassword";
 import ResetPassword from "./ResetPassword";
-import UserSettings from "./UserSettings";
+import ChangePassword from "./ChangePassword";
 import AdminRoute from "./AdminRoute";
 import Unauthorized from "./Unauthorized";
 import Error from "./Error";
@@ -16,7 +16,7 @@ export {
 	Verify,
 	ForgotPassword,
 	ResetPassword,
-	UserSettings,
+	ChangePassword,
 	AdminRoute,
 	Unauthorized,
 	Error,

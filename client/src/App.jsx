@@ -9,7 +9,7 @@ import {
 	Verify,
 	ForgotPassword,
 	ResetPassword,
-	UserSettings,
+	ChangePassword,
 	AdminRoute,
 	Unauthorized,
 	Error,
@@ -46,7 +46,7 @@ function App() {
 				<Route path="/reset-password" element={<ResetPassword />} />
 				{/* user routes */}
 				<Route element={<RequireAuth key={"user"} allowedRoles={ROLES.user} />}>
-					<Route path="/user-settings" element={<UserSettings />} />
+					<Route path="/user-settings" element={<ChangePassword />} />
 				</Route>
 				{/* admin routes */}
 				<Route
