@@ -1,11 +1,7 @@
 const User = require("../models/User");
 const { StatusCodes } = require("http-status-codes");
 const CustomError = require("../errors");
-const {
-	attachCookiesToResponse,
-	createTokenUser,
-	checkPermissions,
-} = require("../utils");
+const { checkPermissions } = require("../utils");
 
 const getAllUsers = async (req, res) => {
 	const users = await User.find({ role: "user" }).select({
@@ -57,6 +53,5 @@ module.exports = {
 	getAllUsers,
 	getSingleUser,
 	showCurrentUser,
-	updateUser,
 	updateUserPassword,
 };

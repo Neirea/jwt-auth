@@ -1,4 +1,5 @@
 require("dotenv").config(); // .env support
+require("express-async-errors"); // async await error handling
 
 // express server
 const express = require("express");
@@ -17,6 +18,7 @@ if (process.env.NODE_ENV !== "production") {
 
 //auth router
 const authRouter = require("./routes/authRouter");
+const userRouter = require("./routes/userRouter");
 
 app.set("trust proxy", 1); // Indicates the app is behind a front-facing proxy, and to use the X-Forwarded-* headers to determine the connection and the IP address of the client.
 app.use(helmet());
@@ -28,6 +30,7 @@ app.use(cookieParser(process.env.JWT_SECRET));
 
 // Using routers
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/user", userRouter);
 
 // middleware
 const notFoundMiddleware = require("./middleware/not-found"); // Page not found

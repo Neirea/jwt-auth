@@ -27,7 +27,11 @@ function App() {
 	const { isLoading } = useGlobalContext();
 
 	if (isLoading) {
-		return <div>Loading...</div>;
+		return (
+			<main className="center-flex">
+				<h1>Loading...</h1>
+			</main>
+		);
 	}
 
 	return (

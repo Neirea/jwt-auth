@@ -11,12 +11,11 @@ const authenticateUser = async (req, res, next) => {
 			req.user = payload.user;
 			return next();
 		}
-
 		//intercept show me request without cookies
-		if (!refreshToken && req.originalUrl == "/api/v1/user/showMe") {
-			res.status(200).json(false);
-			return;
-		}
+		// if (!refreshToken && req.originalUrl == "/api/v1/user/showMe") {
+		// 	res.status(200).json(false);
+		// 	return;
+		// }
 		const payload = isTokenValid(refreshToken);
 
 		const existingToken = await Token.findOne({
