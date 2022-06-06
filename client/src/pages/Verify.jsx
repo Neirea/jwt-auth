@@ -39,7 +39,9 @@ const Verify = () => {
 		return (
 			<main className="center-flex">
 				<h2>Account Confirmed</h2>
-				<Link className="btn" to="/login"></Link>
+				<Link className="btn" to="/login">
+					Login
+				</Link>
 			</main>
 		);
 	}

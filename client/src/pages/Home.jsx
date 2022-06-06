@@ -21,7 +21,7 @@ const Home = () => {
 				</>
 			) : (
 				<>
-					<h2>Welcome, User Name</h2>
+					<h2>{`Welcome, ${user.name}`}</h2>
 					<Link className="btn" to="/user-settings">
 						Change Password
 					</Link>

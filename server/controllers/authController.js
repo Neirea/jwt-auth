@@ -95,7 +95,7 @@ const login = async (req, res) => {
 	const tokenUser = createTokenUser(user); // {name, userId, role}
 
 	//create new refresh token
-	const refreshToken = "";
+	let refreshToken = "";
 	//check for existing token in DB to update
 	const existingToken = await Token.findOne({ user: user._id });
 	if (existingToken) {
@@ -121,6 +121,7 @@ const login = async (req, res) => {
 	//else create new token in DB
 	const userAgent = req.headers["user-agent"];
 	const ip = req.ip;
+	refreshToken = crypto.randomBytes(40).toString("hex");
 	const userToken = { refreshToken, ip, userAgent, remember, user: user._id };
 
 	await Token.create(userToken);

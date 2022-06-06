@@ -32,7 +32,7 @@ const Login = () => {
 	const handleChange = (e) => {
 		const inputValue =
 			e.target.type === "checkbox" ? e.target.checked : e.target.value;
-		setValues({ ...values, [e.target.type]: inputValue });
+		setValues({ ...values, [e.target.name]: inputValue });
 	};
 
 	return (

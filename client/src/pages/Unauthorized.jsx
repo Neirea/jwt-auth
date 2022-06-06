@@ -6,8 +6,8 @@ const Unauthorized = () => {
 	return (
 		<main className="center-flex">
 			<div className="alert">
-				<h2>Unauthorized</h2>
-				<p>You do not have access to the requested page.</p>
+				<h1>Unauthorized</h1>
+				<h2>You do not have access to the requested page.</h2>
 				<br />
 				<button className="btn" onClick={goBack}>
 					Go Back

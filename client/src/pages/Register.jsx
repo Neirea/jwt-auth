@@ -64,8 +64,10 @@ const Register = () => {
 		<main className="center-flex">
 			{success && alert.show && (
 				<div className="alert">
-					<p>{alert.text}</p>
-					<Link to="/">Go back to Home page</Link>
+					<h2>{alert.text}</h2>
+					<Link className="alert-link" to="/">
+						Go back to Home page
+					</Link>
 				</div>
 			)}
 			{!success && (

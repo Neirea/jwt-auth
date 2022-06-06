@@ -81,3 +81,8 @@ body {
 	color: red;
 	text-align: center;
 }
+.alert-link {
+	color: mediumpurple;
+	text-decoration: none;
+	cursor: pointer;
+}
